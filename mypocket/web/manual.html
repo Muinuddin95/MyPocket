@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Library System - Interactive User Manual</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #faf8f5;
+            --primary: #e65c00;
+            --primary-light: #ffebcc;
+            --text-color: #333333;
+            --card-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --annotation-red: #ff3b30;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #e65c00, #ff8c1a);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(230, 92, 0, 0.15);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #111;
+            margin: 40px 0 20px 0;
+            border-left: 5px solid var(--primary);
+            padding-left: 15px;
+        }
+
+        /* Screen Showcase Grid */
+        .manual-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 40px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .manual-card-header {
+            background: #f1ede6;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .manual-card-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .manual-card-badge {
+            background: var(--primary);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .manual-card-body {
+            padding: 30px;
+            background: #fff8f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .manual-card-description {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.95rem;
+        }
+
+        /* Mockup Layouts */
+        .elib-mockup {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            border: 1px solid #d3d3d3;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Header Mockup */
+        .elib-header {
+            background: white;
+            border-bottom: 3px solid var(--primary);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #e65c00;
+        }
+
+        .elib-logo-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .elib-logo-text {
+            color: #d35400;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .elib-nav {
+            display: flex;
+            gap: 20px;
+            color: #d35400;
+        }
+
+        .elib-nav span {
+            cursor: pointer;
+        }
+
+        .elib-nav span.active {
+            color: #e65c00;
+            border-bottom: 2px solid #e65c00;
+        }
+
+        .elib-user-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #e65c00;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* Hero Mockup */
+        .elib-hero {
+            background: linear-gradient(120deg, #f9ebd2 40%, #e65c00 40%);
+            padding: 40px;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .elib-hero-text {
+            width: 50%;
+        }
+
+        .elib-hero-tag {
+            color: #e65c00;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .elib-hero-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #222;
+            margin-bottom: 12px;
+        }
+
+        .elib-hero-desc {
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .elib-btn {
+            background: #e65c00;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-weight: 600;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        /* Dropdown Mockup */
+        .elib-dropdown {
+            position: absolute;
+            top: 55px;
+            right: 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            width: 120px;
+            z-index: 10;
+        }
+
+        .elib-dropdown-item {
+            padding: 10px;
+            font-size: 0.8rem;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+
+        .elib-dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .elib-dropdown-item:hover {
+            background: #fff5eb;
+        }
+
+        /* Annotation Overlay CSS */
+        .annotation-circle {
+            position: absolute;
+            border: 3px solid var(--annotation-red);
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 8px rgba(255, 59, 48, 0.6);
+        }
+
+        .annotation-arrow-svg {
+            position: absolute;
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        .annotation-label {
+            position: absolute;
+            color: #ff7a45;
+            font-weight: 700;
+            font-size: 1.1rem;
+            pointer-events: none;
+            text-shadow: 1px 1px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white;
+            white-space: nowrap;
+            z-index: 100;
+        }
+
+        /* Page Layouts */
+        .elib-login-card {
+            width: 320px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 40px auto;
+            padding: 30px;
+            border-top: 4px solid var(--primary);
+        }
+
+        .elib-login-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .elib-form-group {
+            margin-bottom: 15px;
+        }
+
+        .elib-form-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .elib-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        /* Admin Dashboard Grid Mockup */
+        .admin-dashboard {
+            padding: 20px;
+            background: #fffcf8;
+        }
+
+        .admin-dashboard-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #ffd8b3;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(230,92,0,0.04);
+        }
+
+        .stat-card-num {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-card-label {
+            font-size: 0.7rem;
+            color: #777;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .charts-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .chart-box {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 15px;
+            height: 180px;
+        }
+
+        .chart-box-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* Tables Mockup */
+        .elib-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            margin-top: 15px;
+            background: white;
+        }
+
+        .elib-table th {
+            background: #e65c00;
+            color: white;
+            text-align: left;
+            padding: 8px;
+        }
+
+        .elib-table td {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .btn-delete {
+            background: #fff0f0;
+            color: #ff3b30;
+            border: 1px solid #ffcccc;
+            padding: 3px 8px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>E-Library System</h1>
+            <p>Interactive Visual User Manual & Screenshots Guide</p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- SECTION 1: ADMIN -->
+        <h2 class="section-title">1. Administrator View & Annotations</h2>
+
+        <!-- Manual Card 1: Guest Sign In Dropdown -->
+        <div class="manual-card">
+            <div class="manual-card-header">
+                <span class="manual-card-title">Homepage Profile Dropdown - Login Trigger</span>
+                <span class="manual-card-badge">Page 4 (Top)</span>
+            </div>
+            <div class="manual-card-body">
+                <div class="elib-mockup" style="height: 380px;">
+                    <!-- E-Library Header -->
+                    <div class="elib-header">
+                        <div class="elib-logo-section">
+                            <span class="elib-logo-text">SMK METHODIST E-LIBRARY</span>
+                        </div>
+                        <div class="elib-nav">
+                            <span>Home</span>
+                            <span>About Us</span>
+                            <span>Book Catalogue</span>
+                            <span>Online Database</span>
+                            <span>Fine Portal</span>
+                        </div>
+                        <div class="elib-user-icon">👤</div>
+                    </div>
+
+                    <!-- Dropdown List -->
+                    <div class="elib-dropdown">
+                        <div class="elib-dropdown-item">Guest</div>
+                        <div class="elib-dropdown-item" id="login-dropdown-btn">Log In</div>
+                        <div class="elib-dropdown-item">Sign Up</div>
+                    </div>
+
+                    <!-- Hero Banner -->
+                    <div class="elib-hero">
+                        <div class="elib-hero-text">
+                            <div class="elib-hero-tag">Reading Culture</div>
+                            <div class="elib-hero-title">Read today, lead tomorrow.</div>
+                            <div class="elib-hero-desc">Explore reading programmes, student activities, and library initiatives.</div>
+                            <button class="elib-btn">Start Reading</button>
+                        </div>
+                    </div>
+
+                    <!-- Red circle around Dropdown Log In option -->
+                    <div class="annotation-circle" style="top: 80px; right: 23px; width: 114px; height: 32px;"></div>
+                    
+                    <!-- Arrow and Label Overlay -->
+                    <svg class="annotation-arrow-svg" style="top: 75px; right: 145px; width: 150px; height: 50px;">
+                        <path d="M 0,25 L 120,25" stroke="#ff7a45" stroke-width="2" fill="none" />
+                        <polygon points="120,21 128,25 120,29" fill="#ff7a45" />
+                    </svg>
+                    <div class="annotation-label" style="top: 88px; right: 305px;">Admin can click log in</div>
+                </div>
+            </div>
+            <div class="manual-card-description">
+                <strong>Description</strong>: The homepage features a responsive header menu. Clicking on the student profile avatar icon brings up the authorization dropdown panel. Admins can click on <strong>Log In</strong> to input credentials.
+            </div>
+        </div>
+
+        <!-- Manual Card 2: Login Page Mockup -->
+        <div class="manual-card">
+            <div class="manual-card-header">
+                <span class="manual-card-title">Credentials Portal Login</span>
+                <span class="manual-card-badge">Page 4 (Bottom)</span>
+            </div>
+            <div class="manual-card-body">
+                <div class="elib-mockup" style="background: #fffdf9; display: flex; align-items: center; justify-content: center; height: 350px;">
+                    <div class="elib-login-card">
+                        <div class="elib-login-title">Log in</div>
+                        <div class="elib-form-group">
+                            <label>Username</label>
+                            <input type="text" class="elib-input" placeholder="Enter username" disabled>
+                        </div>
+                        <div class="elib-form-group">
+                            <label>Password</label>
+                            <input type="password" class="elib-input" placeholder="Enter password" disabled>
+                        </div>
+                        <button class="elib-btn" style="width: 100%; margin-top: 10px;">Log in</button>
+                    </div>
+                </div>
+            </div>
+            <div class="manual-card-description">
+                <strong>Description</strong>: Secure authentication portal. Enter your verified library credentials and press <strong>Log in</strong>.
+            </div>
+        </div>
+
+        <!-- Manual Card 3: Admin Panel Header Link -->
+        <div class="manual-card">
+            <div class="manual-card-header">
+                <span class="manual-card-title">Admin Dashboard Entry Point</span>
+                <span class="manual-card-badge">Page 5 (Top)</span>
+            </div>
+            <div class="manual-card-body">
+                <div class="elib-mockup" style="height: 380px;">
+                    <!-- Header with Admin Panel Tab -->
+                    <div class="elib-header">
+                        <div class="elib-logo-section">
+                            <span class="elib-logo-text">SMK METHODIST E-LIBRARY</span>
+                        </div>
+                        <div class="elib-nav">
+                            <span>Home</span>
+                            <span>About Us</span>
+                            <span>Book Catalogue</span>
+                            <span>Online Database</span>
+                            <span>Fine Portal</span>
+                            <span style="color: #e65c00; font-weight: bold;">Admin Panel</span>
+                        </div>
+                        <div class="elib-user-icon">A</div>
+                    </div>
+
+                    <!-- Hero Banner -->
+                    <div class="elib-hero">
+                        <div class="elib-hero-text">
+                            <div class="elib-hero-tag">Learning Support</div>
+                            <div class="elib-hero-title">Resources for students & teachers.</div>
+                            <div class="elib-hero-desc">Access learning resources, digital references, and academic support.</div>
+                            <button class="elib-btn">View Directories</button>
+                        </div>
+                    </div>
+
+                    <!-- Red circle around Admin Panel tab link -->
+                    <div class="annotation-circle" style="top: 10px; right: 55px; width: 100px; height: 35px;"></div>
+                    
+                    <!-- Arrow and Label Overlay -->
+                    <svg class="annotation-arrow-svg" style="top: 35px; right: 105px; width: 100px; height: 80px;">
+                        <path d="M 50,0 Q 50,60 0,60" stroke="#ff7a45" stroke-width="2" fill="none" />
+                        <polygon points="46,10 50,0 54,10" fill="#ff7a45" />
+                    </svg>
+                    <div class="annotation-label" style="top: 100px; right: 110px;">Admin can click admin panel to access the admin management</div>
+                </div>
+            </div>
+            <div class="manual-card-description">
+                <strong>Description</strong>: Once logged in as an administrator, an extra menu item titled **Admin Panel** becomes visible on the global navigation header. Click it to navigate to the system statistics and settings.
+            </div>
+        </div>
+
+        <!-- Manual Card 4: Delete User Action -->
+        <div class="manual-card">
+            <div class="manual-card-header">
+                <span class="manual-card-title">User Account Control - Delete Action</span>
+                <span class="manual-card-badge">Page 6 (Top)</span>
+            </div>
+            <div class="manual-card-body">
+                <div class="elib-mockup" style="padding: 20px; background: #fffcf8; height: 320px;">
+                    <div class="admin-dashboard-title" style="margin-bottom: 10px;">👤 Registered Users</div>
+                    
+                    <table class="elib-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Username</th>
+                                <th>Reviews</th>
+                                <th>Books Read</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>syed</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td><button class="btn-delete" id="target-delete-btn">Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>shamir</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td><button class="btn-delete">Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>aminah</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td><button class="btn-delete">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Red circle around first Delete Button -->
+                    <div class="annotation-circle" style="top: 60px; right: 28px; width: 65px; height: 28px;"></div>
+                    
+                    <!-- Arrow and Label Overlay -->
+                    <svg class="annotation-arrow-svg" style="top: 55px; right: 100px; width: 140px; height: 30px;">
+                        <path d="M 120,15 L 10,15" stroke="#ff7a45" stroke-width="2" fill="none" />
+                        <polygon points="10,11 2,15 10,19" fill="#ff7a45" />
+                    </svg>
+                    <div class="annotation-label" style="top: 55px; right: 230px;">Admin can delete user account by clicking delete button</div>
+                </div>
+            </div>
+            <div class="manual-card-description">
+                <strong>Description</strong>: Under User Management list, each row presents statistics for that user. Clicking the red <strong>Delete</strong> button next to a student profile permanently clears that account from the system databases.
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        console.log("Interactive manual template loaded.");
+    </script>
+</body>
+</html>
