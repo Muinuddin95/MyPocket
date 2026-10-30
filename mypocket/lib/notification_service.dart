@@ -1,4 +1,4 @@
-﻿// lib/notification_service.dart
+// lib/notification_service.dart
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -16,6 +16,7 @@ class NotificationService {
   bool _initialized = false;
 
   Future<void> initialize() async {
+    if (kIsWeb) return;
     if (_initialized) return;
 
     // Request permissions
@@ -56,6 +57,7 @@ class NotificationService {
     required String body,
     String? payload,
   }) async {
+    if (kIsWeb) return;
     if (!_initialized) {
       await initialize();
     }

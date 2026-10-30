@@ -7,9 +7,10 @@ import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'subscription_service.dart';
 import 'premium.dart';
+import 'demo.dart';
 
-// ⚠️ Replace with your free Gemini API key from https://aistudio.google.com/
-const String _kGeminiApiKey = 'AQ.Ab8RN6Lol1jntYkkOPzDY5qoUxORGP9iUuhOFOCZHnQQw3Ae6g';
+// The Gemini key must stay on a server (Supabase Edge Function), never in the app.
+const String _kGeminiApiKey = '';
 const String _kGeminiModel = 'gemini-2.5-flash';
 const String _kGeminiUrl =
     'https://generativelanguage.googleapis.com/v1beta/models/$_kGeminiModel:generateContent';
@@ -306,14 +307,11 @@ INSTRUCTIONS:
       };
 
       final apiKey = _kGeminiApiKey;
-      if (apiKey == 'YOUR_GEMINI_API_KEY_HERE') {
+      if (apiKey.isEmpty) {
         await Future.delayed(const Duration(milliseconds: 800));
-        const mockReply =
-            '⚠️ Gemini API key not set yet!\n\nTo enable AI responses:\n'
-            '1. Go to aistudio.google.com\n'
-            '2. Get a free API key\n'
-            '3. Replace YOUR_GEMINI_API_KEY_HERE in ai_chat.dart\n\n'
-            'Once done, I can give you real personalised financial advice! 💪';
+        const mockReply = kDemoMode
+            ? 'AI chat is turned off in this web demo.'
+            : 'AI chat is temporarily unavailable. Please try again later.';
         _addBotMessage(mockReply);
         return;
       }

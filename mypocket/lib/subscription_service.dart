@@ -92,8 +92,8 @@ class SubscriptionService {
     } catch (_) {}
   }
 
-  static const String defaultClientId = 'AUEmpVTe59uFRp5bximVH5cYYaGKDyC-oXJCBscpGVYX75LQAdo1-e_OXmaODNDCtEGGwGwt-KpHxWCB';
-  static const String defaultSecretKey = 'EA7Gsm6knT9W4SuTQk0pRC6D4u9EL-fnhReUdsHbAFamnOAi2yhXgBw7UH9IjIYznUGg7KGuM7p8AZb9';
+  static const String defaultClientId = '';
+  static const String defaultSecretKey = '';
 
   Future<Map<String, dynamic>> getPayPalSettings() async {
     final prefs = await SharedPreferences.getInstance();

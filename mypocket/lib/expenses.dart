@@ -1,4 +1,5 @@
 // expenses.dart
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -1472,7 +1473,7 @@ class _AddExpenseSheetState extends State<_AddExpenseSheet> {
                       color: _isDark ? Colors.white : const Color(0xFF1A5C4A),
                     ),
                   ),
-                  if (!_isEditing)
+                  if (!_isEditing && !kIsWeb)
                     TextButton.icon(
                       onPressed: _scanReceipt,
                       icon: Icon(Icons.qr_code_scanner_rounded, color: _isDark ? Colors.tealAccent.shade400 : _primaryGreen, size: 18),

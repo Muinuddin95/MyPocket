@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'Login.dart';
+import 'demo.dart';
 import 'home.dart';
 import 'onboarding.dart';
 import 'theme.dart';
@@ -105,7 +106,7 @@ class _MyAppState extends State<MyApp> {
         onThemeToggle: toggleTheme, // ← FIXED: was togglTheme
         isDarkMode: _isDarkMode,
       );
-    } else if (widget.seenOnboarding) {
+    } else if (widget.seenOnboarding || kDemoMode) {
       home = LoginScreen(
         onThemeToggle: toggleTheme,
         isDarkMode: _isDarkMode,
@@ -124,15 +125,23 @@ class _MyAppState extends State<MyApp> {
       home: _showSplash ? _buildSplashScreen() : home,
       builder: (context, child) {
         if (!kIsWeb) return child!;
+        // Phone-shaped frame on large screens, full screen on phones.
+        // It shrinks to fit shorter screens so nothing is cut off.
+        final screen = MediaQuery.sizeOf(context);
+        final isPhone = screen.width < 500;
+        final frame = Size(
+          isPhone ? screen.width : 390,
+          isPhone || screen.height < 844 ? screen.height : 844,
+        );
         return Container(
           color: const Color(0xFF1E222B),
           child: Center(
             child: Container(
-              width: 390,
-              height: 844,
+              width: frame.width,
+              height: frame.height,
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(36),
+                borderRadius: BorderRadius.circular(isPhone ? 0 : 36),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: 0.4),
@@ -141,7 +150,10 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ],
               ),
-              child: child,
+              child: MediaQuery(
+                data: MediaQuery.of(context).copyWith(size: frame),
+                child: child!,
+              ),
             ),
           ),
         );

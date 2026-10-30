@@ -13,6 +13,7 @@ import 'theme.dart';
 import 'savings.dart';
 import 'recurring.dart';
 import 'premium.dart';
+import 'demo.dart';
 import 'subscription_service.dart';
 import 'widgets/glassmorphism.dart';
 
@@ -1248,17 +1249,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ],
 
                         // ── Security ──────────────────────────────────────
-                        _label('Security'),
-                        _card([
-                          _action(
-                            Icons.lock_outline_rounded,
-                            const Color(0xFF2980B9),
-                            'Change password',
-                            null,
-                            _showChangePassword,
-                          ),
-                        ]),
-                        const SizedBox(height: 20),
+                        if (!kDemoMode) ...[
+                          _label('Security'),
+                          _card([
+                            _action(
+                              Icons.lock_outline_rounded,
+                              const Color(0xFF2980B9),
+                              'Change password',
+                              null,
+                              _showChangePassword,
+                            ),
+                          ]),
+                          const SizedBox(height: 20),
+                        ],
 
                         // ── About ─────────────────────────────────────────
                         _label('About'),
@@ -1296,7 +1299,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               );
                             },
                           ),
-                          _div(),
+                          if (!kDemoMode) ...[_div(),
                           _action(
                             Icons.support_agent_rounded,
                             const Color(0xFF2E9B78), // _primaryGreen
@@ -1311,6 +1314,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               );
                             },
                           ),
+                          ],
                         ]),
                         const SizedBox(height: 20),
 
@@ -1324,15 +1328,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             null,
                             _signOut,
                           ),
-                          _div(),
-                          _action(
-                            Icons.delete_forever_rounded,
-                            Colors.redAccent,
-                            'Delete account',
-                            'Permanently delete all data',
-                            _deleteAccount,
-                            titleColor: Colors.redAccent,
-                          ),
+                          if (!kDemoMode) ...[
+                            _div(),
+                            _action(
+                              Icons.delete_forever_rounded,
+                              Colors.redAccent,
+                              'Delete account',
+                              'Permanently delete all data',
+                              _deleteAccount,
+                              titleColor: Colors.redAccent,
+                            ),
+                          ],
                         ]),
                         const SizedBox(height: 32),
                       ],

@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'demo.dart';
 
 class TourService {
   static String get _tourCompletedKey {
@@ -9,6 +10,7 @@ class TourService {
 
   /// Checks if the user has completed or skipped the tour before.
   static Future<bool> isTourCompleted() async {
+    if (kDemoMode) return true; // the demo skips the tour
     try {
       final prefs = await SharedPreferences.getInstance();
       return prefs.getBool(_tourCompletedKey) ?? false;

@@ -128,12 +128,6 @@ CREATE TABLE IF NOT EXISTS paypal_settings (
 
 -- Enable Row Level Security (optional, or insert policy)
 ALTER TABLE paypal_settings ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY "Allow public read" ON paypal_settings 
-  FOR SELECT USING (true);
-
-CREATE POLICY "Allow service role write" ON paypal_settings 
-  FOR ALL USING (true);
 ''';
 
     if (!mounted) return;

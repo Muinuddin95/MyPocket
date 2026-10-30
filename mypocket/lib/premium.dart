@@ -184,11 +184,7 @@ class _PremiumScreenState extends State<PremiumScreen>
           ],
         ),
         content: const Text(
-          'To enable PayPal payments, configure your credentials in the Admin Panel:\n\n'
-          '1. Log in as admin (e.g. admin95@gmail.com)\n'
-          '2. Click the PayPal settings icon in the top right of the Admin screen\n'
-          '3. Input your Client ID & Secret Key\n'
-          '4. Click Save to enable payments instantly!',
+          'Premium payments are temporarily unavailable. Please try again later.',
           style: TextStyle(fontSize: 13, height: 1.5),
         ),
         actions: [
@@ -196,27 +192,6 @@ class _PremiumScreenState extends State<PremiumScreen>
             onPressed: () => Navigator.pop(ctx),
             child: const Text('Got it',
                 style: TextStyle(color: Color(0xFF1A5C4A))),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF1A5C4A),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-            ),
-            onPressed: () async {
-              Navigator.pop(ctx);
-              // Simulate premium activation for testing
-              final activated =
-                  await SubscriptionService.instance.activatePremium();
-              if (activated && mounted) {
-                setState(() => _isPremium = true);
-                _confettiController.play();
-                widget.onPremiumActivated?.call();
-                HapticFeedback.heavyImpact();
-              }
-            },
-            child: const Text('Test Premium',
-                style: TextStyle(color: Colors.white)),
           ),
         ],
       ),

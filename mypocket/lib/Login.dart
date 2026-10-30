@@ -6,6 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'home.dart';
 import 'logo.dart';
 import 'admin.dart';
+import 'demo.dart';
 import 'package:local_auth/local_auth.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -257,6 +258,17 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  // Asks the database whether this logged-in user is listed in the admins table.
+  Future<bool> _isCurrentUserAdmin() async {
+    try {
+      final result = await Supabase.instance.client.rpc('is_admin');
+      return result == true;
+    } catch (e) {
+      debugPrint('Admin check failed: $e');
+      return false;
+    }
+  }
+
   Future<void> _authenticateAdminAndNavigate() async {
     final localAuth = LocalAuthentication();
     try {
@@ -290,7 +302,14 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     } catch (e) {
       debugPrint('Biometric error: $e');
-      _navigateToAdmin();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Could not verify your identity. Access denied.'),
+            backgroundColor: Colors.redAccent,
+          ),
+        );
+      }
     }
   }
 
@@ -313,12 +332,6 @@ class _LoginScreenState extends State<LoginScreen> {
     final emailVal = _emailController.text.trim();
     final passwordVal = _passwordController.text;
 
-    if (emailVal == 'admin95@gmail.com' && passwordVal == '311995') {
-      await _saveCredentials();
-      await _authenticateAdminAndNavigate();
-      return;
-    }
-
     setState(() => _isLoading = true);
     try {
       final response = await Supabase.instance.client.auth.signInWithPassword(
@@ -328,8 +341,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (response.session != null && mounted) {
         await _saveCredentials();
-        final email = _emailController.text.trim().toLowerCase();
-        final isAdmin = email.contains('admin');
+        final isAdmin = await _isCurrentUserAdmin();
         if (isAdmin) {
           await _authenticateAdminAndNavigate();
         } else {
@@ -375,6 +387,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (kDemoMode) return const DemoWelcome();
     return Scaffold(
       backgroundColor: _lightBg,
       body: SafeArea(
@@ -938,6 +951,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (kDemoMode) return const DemoWelcome();
     return Scaffold(
       backgroundColor: _lightBg,
       body: SafeArea(
